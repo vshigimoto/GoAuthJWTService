@@ -1,9 +1,10 @@
-package server
+package http
 
 import (
 	"context"
-	"github.com/vshigimoto/GoAuthJWTService/internal/config"
 	"net/http"
+
+	"github.com/vshigimoto/GoAuthJWTService/internal/config"
 )
 
 type Server struct {

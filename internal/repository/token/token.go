@@ -1,9 +1,15 @@
 package token
 
+import (
+	"go.mongodb.org/mongo-driver/mongo"
+)
+
 type Repo struct {
-	//add mongo conn
+	db *mongo.Collection
 }
 
-func NewRepo() *Repo {
-	return &Repo{}
+func NewRepo(db *mongo.Database, collection string) *Repo {
+	return &Repo{
+		db: db.Collection(collection),
+	}
 }

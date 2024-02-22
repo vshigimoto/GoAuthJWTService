@@ -1,16 +1,25 @@
 package services
 
+import (
+	"context"
+
+	"github.com/vshigimoto/GoAuthJWTService/internal/repository"
+	"github.com/vshigimoto/GoAuthJWTService/internal/services/token"
+)
+
 type Services struct {
-	TokenServiceI
+	TokenService
 }
 
-type TokenServiceI struct {
-	GenerateAccessToken()
-	GenerateRefreshToken()
+type TokenService interface {
+	GenerateAccessToken(ctx context.Context, userGUID string) (string, error)
+	GenerateRefreshToken(ctx context.Context, userGUID string) (string, error)
+	CompareHashAndRefresh(ctx context.Context, refreshToken string) (string, error)
+	HashToken(ctx context.Context, refreshToken string) (string, error)
 }
 
-func New() *Services {
+func New(repo *repository.Repository) *Services {
 	return &Services{
-
+		TokenService: token.NewService(repo.TokenRepo),
 	}
 }
