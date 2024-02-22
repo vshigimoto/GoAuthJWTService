@@ -1,5 +1,12 @@
 http:
   port: 8080
-  address: ''
+  address: ':8080'
   readTimeout: 10s
   writeTimeout: 10s
+
+mongo:
+  username: 'medods'
+  password: 'medods'
+  url: 'mongodb://localhost:27017'
+  db: 'medods'
+  collection: 'token'
