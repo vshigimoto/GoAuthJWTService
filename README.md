@@ -19,3 +19,6 @@ http://localhost:8080/docs/index.html
     
 #### Запуск в докере(легче в использовании и меньше мороки):
     make run
+
+#### Video example of project functions
+![Video](https://github.com/vshigimoto/GoAuthJWTService/blob/main/example.gif)
