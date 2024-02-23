@@ -10,9 +10,9 @@ import (
 	"github.com/vshigimoto/GoAuthJWTService/internal/config"
 )
 
-// @title		TestTask
-// @version		1.0
-// @description	TestTask for Junior Go Dev
+// @title			TestTask
+// @version			1.0
+// @description		TestTask for Junior Go Dev
 // @host			localhost:8080
 // @BasePath		/auth
 func main() {
