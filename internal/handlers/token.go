@@ -8,6 +8,18 @@ import (
 	"github.com/vshigimoto/GoAuthJWTService/internal/entity"
 )
 
+// GetTokens generates a pair of access and refresh tokens based on a GUID provided as a query parameter.
+// @Summary      Generate token pairs
+// @Description  Generates a pair of access and refresh tokens for the given GUID.
+// @Accept       json
+// @Produce      json
+// @Param        user_guid  query     string  true  "GUID"
+// @Success      200        {object}  entity.TokenResponse
+// @Failure      400        {object}  string "User GUID is required"
+// @Failure      405        {object}  string "Only GET method is allowed"
+// @Failure      500        {object}  string "Failed to generate access token"
+// @Failure      500        {object}  string "Failed to generate refresh token"
+// @Router       /token [get]
 func (h *Handlers) GetTokens(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		h.l.Error("Not allowed method")

@@ -1,0 +1,133 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "TestTask for Junior Go Dev",
+        "title": "TestTask",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/auth",
+    "paths": {
+        "/token": {
+            "get": {
+                "description": "Generates a pair of access and refresh tokens for the given GUID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Generate token pairs",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "GUID",
+                        "name": "user_guid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.TokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "User GUID is required",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "Only GET method is allowed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to generate refresh token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/token/refresh": {
+            "post": {
+                "description": "Generates new access and refresh tokens based on the provided refresh token and user GUID.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Refresh token",
+                "parameters": [
+                    {
+                        "description": "Refresh Token Request",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.RefreshTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A new pair of access and refresh tokens",
+                        "schema": {
+                            "$ref": "#/definitions/entity.TokenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error decoding request or Invalid refresh_token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "405": {
+                        "description": "Only POST method is allowed",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to generate access token or refresh token or Error delete data",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entity.TokenResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "handlers.RefreshTokenRequest": {
+            "type": "object",
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                },
+                "user_guid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

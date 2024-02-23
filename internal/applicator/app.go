@@ -48,7 +48,6 @@ func (a *Applicator) Run() {
 
 	server.SetKeepAlivesEnabled(true)
 
-	a.l.Info("Init graceful shutdown completed")
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
@@ -56,12 +55,11 @@ func (a *Applicator) Run() {
 		a.l.Info("Stop server")
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
 		defer cancel()
-
 		if err := server.Shutdown(ctx); err != nil {
 			a.l.Infof("Failure stop server: %v", err)
 		}
 	}()
-
+	a.l.Info("Init graceful shutdown completed")
 	a.l.Infof("Start server on port: %d", a.cfg.Http.Port)
 	if err := server.Start(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatalf("Failure start server: %v", err)

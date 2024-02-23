@@ -12,6 +12,17 @@ type RefreshTokenRequest struct {
 	UserGuid     string `json:"user_guid"`
 }
 
+// RefreshToken handles the refresh token operation, generating new access and refresh tokens.
+// @Summary      Refresh token
+// @Description  Generates new access and refresh tokens based on the provided refresh token and user GUID.
+// @Accept       json
+// @Produce      json
+// @Param        requestBody  body      RefreshTokenRequest  true  "Refresh Token Request"
+// @Success      200          {object}  entity.TokenResponse  "A new pair of access and refresh tokens"
+// @Failure      400          {object}  string               "Error decoding request or Invalid refresh_token"
+// @Failure      405          {object}  string               "Only POST method is allowed"
+// @Failure      500          {object}  string               "Failed to generate access token or refresh token or Error delete data"
+// @Router       /token/refresh [post]
 func (h *Handlers) RefreshToken(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		h.l.Infof("Not allowed method")
