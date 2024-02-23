@@ -6,3 +6,10 @@ lint:
 
 gci:
 	gci write .
+
+local:
+	docker-compose up -d mongo
+	go run cmd/auth/main.go
+
+run:
+	docker-compose up -d --build

@@ -15,7 +15,7 @@ http://localhost:8080/docs/index.html
 
 
 #### Запуск локально у себя (лучше make run):
-    make local
+    make local // поменять в конфигах  url: 'mongodb://mongo:27017' на  url: 'mongodb://localhost:27017'
     
 #### Запуск в докере(легче в использовании и меньше мороки):
     make run
