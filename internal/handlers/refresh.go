@@ -72,5 +72,9 @@ func (h *Handlers) RefreshToken(w http.ResponseWriter, r *http.Request) {
 	}
 	h.l.Info("Success create access token")
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(response)
+	err = json.NewEncoder(w).Encode(response)
+	if err != nil {
+		h.l.Error("Failed to encode")
+		return
+	}
 }
