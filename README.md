@@ -22,3 +22,7 @@ http://localhost:8080/docs/index.html
 
 #### Запуск тестов (тесты не доделал):
     make test
+
+#### Video example of project functions
+![Video](https://github.com/vshigimoto/GoAuthJWTService/blob/main/example.gif)
+
