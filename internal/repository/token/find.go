@@ -12,9 +12,9 @@ import (
 func (r *Repo) FindOne(ctx context.Context, key string) (RefreshTokenDocument, error) {
 	var result RefreshTokenDocument
 
-	filter := bson.M{key: key}
+	filter := bson.M{"user_guid": key}
 
-	err := r.db.FindOne(ctx, filter).Decode(&key)
+	err := r.db.FindOne(ctx, filter).Decode(&result)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
 			return RefreshTokenDocument{}, fmt.Errorf("no document found %s : %v", key, key)

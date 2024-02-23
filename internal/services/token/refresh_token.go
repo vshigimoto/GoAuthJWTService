@@ -20,7 +20,7 @@ func (s *Service) GenerateRefreshToken(ctx context.Context, userGuid string) (st
 		return "", fmt.Errorf("failed to generate hash refreshToken: %v", err)
 	}
 
-	err = s.repo.Insert(ctx, hashedRefreshToken, userGuid)
+	err = s.repo.Insert(ctx, userGuid, hashedRefreshToken)
 	if err != nil {
 		return "", fmt.Errorf("failed to insert refresh token: %v", err)
 	}

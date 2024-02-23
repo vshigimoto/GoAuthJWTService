@@ -7,6 +7,6 @@ http:
 mongo:
   username: 'medods'
   password: 'medods'
-  url: 'mongodb://mongo:27017'
+  url: 'mongodb://localhost:27017'
   db: 'medods'
   collection: 'token'
