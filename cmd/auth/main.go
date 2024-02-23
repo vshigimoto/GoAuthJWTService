@@ -2,12 +2,10 @@ package main
 
 import (
 	"github.com/ilyakaznacheev/cleanenv"
-
-	"go.uber.org/zap"
-
 	_ "github.com/vshigimoto/GoAuthJWTService/docs"
 	"github.com/vshigimoto/GoAuthJWTService/internal/applicator"
 	"github.com/vshigimoto/GoAuthJWTService/internal/config"
+	"go.uber.org/zap"
 )
 
 // @title			TestTask

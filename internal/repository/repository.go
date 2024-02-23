@@ -3,9 +3,8 @@ package repository
 import (
 	"context"
 
-	"go.mongodb.org/mongo-driver/mongo"
-
 	"github.com/vshigimoto/GoAuthJWTService/internal/repository/token"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Repository struct {
@@ -13,7 +12,7 @@ type Repository struct {
 }
 
 type TokenRepo interface {
-	Insert(ctx context.Context, userGuid, hashedToken string) error
+	Insert(ctx context.Context, userGUID, hashedToken string) error
 	FindOne(ctx context.Context, key string) (token.RefreshTokenDocument, error)
 	Delete(ctx context.Context, key string) error
 }

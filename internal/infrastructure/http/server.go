@@ -14,10 +14,10 @@ type Server struct {
 func New(cfg *config.Config, router http.Handler) *Server {
 	return &Server{
 		http: &http.Server{
-			Addr:           cfg.Http.Address,
+			Addr:           cfg.HTTP.Address,
 			Handler:        router,
-			ReadTimeout:    cfg.Http.ReadTimeout,
-			WriteTimeout:   cfg.Http.WriteTimeout,
+			ReadTimeout:    cfg.HTTP.ReadTimeout,
+			WriteTimeout:   cfg.HTTP.WriteTimeout,
 			MaxHeaderBytes: http.DefaultMaxHeaderBytes,
 		},
 	}

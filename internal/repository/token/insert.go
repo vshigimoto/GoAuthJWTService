@@ -8,15 +8,14 @@ import (
 
 type RefreshTokenDocument struct {
 	HashedToken  string    `bson:"hashed_token"`
-	UserGuid     string    `bson:"user_guid"`
+	UserGUID     string    `bson:"user_guid"`
 	CreationDate time.Time `bson:"creation_date"`
 }
 
-func (r *Repo) Insert(ctx context.Context, userGuid, hashedToken string) error {
-
+func (r *Repo) Insert(ctx context.Context, userGUID, hashedToken string) error {
 	doc := RefreshTokenDocument{
 		HashedToken:  hashedToken,
-		UserGuid:     userGuid,
+		UserGUID:     userGUID,
 		CreationDate: time.Now(),
 	}
 

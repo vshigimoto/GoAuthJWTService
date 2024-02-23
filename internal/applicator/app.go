@@ -8,9 +8,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
-
-	"go.uber.org/zap"
 
 	"github.com/vshigimoto/GoAuthJWTService/internal/config"
 	"github.com/vshigimoto/GoAuthJWTService/internal/handlers"
@@ -18,6 +15,7 @@ import (
 	"github.com/vshigimoto/GoAuthJWTService/internal/infrastructure/mongo"
 	"github.com/vshigimoto/GoAuthJWTService/internal/repository"
 	"github.com/vshigimoto/GoAuthJWTService/internal/services"
+	"go.uber.org/zap"
 )
 
 type Applicator struct {
@@ -33,12 +31,12 @@ func New(l *zap.SugaredLogger, cfg *config.Config) *Applicator {
 }
 
 func (a *Applicator) Run() {
-	mongoClient, err := mongo.Init(a.cfg.Mongo.Url, a.cfg.Mongo.Username, a.cfg.Mongo.Password)
+	mongoClient, err := mongo.Init(a.cfg.Mongo.URL, a.cfg.Mongo.Username, a.cfg.Mongo.Password)
 	if err != nil {
 		a.l.Panicf("Failed connection to mongo %v", err)
 	}
 
-	repo := repository.New(mongoClient.Database(a.cfg.Mongo.DbName), a.cfg.Mongo.Collection)
+	repo := repository.New(mongoClient.Database(a.cfg.Mongo.DBName), a.cfg.Mongo.Collection)
 
 	services := services.New(repo)
 
@@ -53,14 +51,14 @@ func (a *Applicator) Run() {
 	go func() {
 		<-shutdown
 		a.l.Info("Stop server")
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+		ctx, cancel := context.WithTimeout(context.Background(), a.cfg.HTTP.ShutdownTimeout)
 		defer cancel()
 		if err := server.Shutdown(ctx); err != nil {
 			a.l.Infof("Failure stop server: %v", err)
 		}
 	}()
 	a.l.Info("Init graceful shutdown completed")
-	a.l.Infof("Start server on port: %d", a.cfg.Http.Port)
+	a.l.Infof("Start server on port: %d", a.cfg.HTTP.Port)
 	if err := server.Start(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatalf("Failure start server: %v", err)
 	}

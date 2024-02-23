@@ -1,9 +1,8 @@
 package handlers
 
 import (
-	"go.uber.org/zap"
-
 	"github.com/vshigimoto/GoAuthJWTService/internal/services"
+	"go.uber.org/zap"
 )
 
 type Handlers struct {

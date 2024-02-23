@@ -1,0 +1,65 @@
+# Options for analysis running.
+run:
+  # default concurrency is available CPU number
+  concurrency: 4
+
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  deadline: 10m
+
+  # exit code when at least one issue was found, default is 1
+  issues-exit-code: 1
+
+  # include test files or not, default is true
+  tests: true
+
+  option: value
+# output configuration options
+output:
+  # See the dedicated "output" documentation section.
+  option: value
+# All available settings of specific linters.
+linters-settings:
+  # See the dedicated "linters-settings" documentation section.
+  option: value
+linters:
+  enable-all: true
+  disable:
+    - dupl
+    - golint
+    - interfacer
+    - scopelint
+    - maligned
+    - tagliatelle
+    - wrapcheck
+    - nlreturn
+    - goerr113
+    - exhaustivestruct
+    - cyclop
+    - wsl
+    - godot
+    - gocognit
+    - nestif
+    - errorlint
+    - durationcheck
+    - varnamelen
+    - ireturn
+    - execinquery
+    - exhaustruct
+    - nonamedreturns
+    - varnamelen
+    - gomoddirectives
+    - dupword
+    - nosnakecase
+    - ifshort
+    - varcheck
+    - structcheck
+    - deadcode
+    - depguard
+
+  option: value
+issues:
+  # See the dedicated "issues" documentation section.
+  option: value
+severity:
+  # See the dedicated "severity" documentation section.
+  option: value

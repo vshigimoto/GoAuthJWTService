@@ -2,12 +2,12 @@ package token
 
 import (
 	"context"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (s *Service) CompareHashAndRefresh(ctx context.Context, refreshToken, userGuid string) error {
-
-	hash, err := s.repo.FindOne(ctx, userGuid)
+func (s *Service) CompareHashAndRefresh(ctx context.Context, refreshToken, userGUID string) error {
+	hash, err := s.repo.FindOne(ctx, userGUID)
 	if err != nil {
 		return err
 	}

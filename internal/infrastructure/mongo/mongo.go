@@ -24,7 +24,6 @@ func Init(url, username, password string) (*mongo.Client, error) {
 	defer cancel()
 
 	client, err := mongo.Connect(ctx, clientOptions)
-
 	if err != nil {
 		return nil, err
 	}

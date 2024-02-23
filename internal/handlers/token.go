@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 
@@ -34,14 +33,14 @@ func (h *Handlers) GetTokens(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	accessToken, err := h.services.GenerateAccessToken(context.Background(), userGUID)
+	accessToken, err := h.services.GenerateAccessToken(r.Context(), userGUID)
 	if err != nil {
 		h.l.Error("Failed to generate access token")
 		http.Error(w, "Failed to generate access token", http.StatusInternalServerError)
 		return
 	}
 
-	refreshToken, err := h.services.GenerateRefreshToken(context.Background(), userGUID)
+	refreshToken, err := h.services.GenerateRefreshToken(r.Context(), userGUID)
 	if err != nil {
 		h.l.Error("Failed to generate refresh token")
 		http.Error(w, "Failed to generate refresh token", http.StatusInternalServerError)

@@ -7,8 +7,10 @@ import (
 	"fmt"
 )
 
-func (s *Service) GenerateRefreshToken(ctx context.Context, userGuid string) (string, error) {
-	refreshTokenBytes := make([]byte, 32)
+const refreshTokenBytes = 32
+
+func (s *Service) GenerateRefreshToken(ctx context.Context, userGUID string) (string, error) {
+	refreshTokenBytes := make([]byte, refreshTokenBytes)
 	_, err := rand.Read(refreshTokenBytes)
 	if err != nil {
 		return "", fmt.Errorf("failed to generate refresh token: %v", err)
@@ -20,7 +22,7 @@ func (s *Service) GenerateRefreshToken(ctx context.Context, userGuid string) (st
 		return "", fmt.Errorf("failed to generate hash refreshToken: %v", err)
 	}
 
-	err = s.repo.Insert(ctx, userGuid, hashedRefreshToken)
+	err = s.repo.Insert(ctx, userGUID, hashedRefreshToken)
 	if err != nil {
 		return "", fmt.Errorf("failed to insert refresh token: %v", err)
 	}
