@@ -1,5 +1,5 @@
 # GoAuthJWTService
-тестовое задание на junior go developer
+тестовое задание на go developer
 
 # Доступные эндпоинты
 
